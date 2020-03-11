@@ -1,0 +1,10 @@
+﻿@using WebApp.ViewModels
+@using Syncfusion.EJ2
+@model IEnumerable<ItemViewModel>
+<div class="control-section">
+    <div class="control_wrapper">
+        <ejs-treeview id="treedata" sortOrder="Ascending">
+            <e-treeview-fields dataSource="Model" id="Id" parentId="ParentId" text="Name" hasChildren="Items" expanded="true" iconCss="IconCss"></e-treeview-fields>
+        </ejs-treeview>
+    </div>
+</div>
