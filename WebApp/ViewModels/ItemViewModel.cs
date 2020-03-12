@@ -9,6 +9,7 @@ namespace WebApp.ViewModels
     {
         public ItemViewModel()
         {
+            FileType = "folder";
             HasChild = true;
             Expanded = true;
             Items = new HashSet<ItemViewModel>();

@@ -1,4 +1,5 @@
 ﻿@using WebApp.ViewModels
+@using WebApp.Constant
 @model IEnumerable<ItemViewModel>
 
 <table class="table">
@@ -8,16 +9,28 @@
         <th>Type</th>
         <th>Convert</th>
     </tr>
-    @foreach(var document in Model)
+    @foreach (var document in Model)
     {
         <tr>
             <td><input type="checkbox" /></td>
             <td>@document.Name</td>
-            <td>@document.IconCss</td>
+            <td>@document.FileType</td>
             <td>
-                <a href="#" class="btn btn-outline-success">Pdf</a>
-                <a href="#" class="btn btn-outline-primary">Docx</a>
-                <a href="#" class="btn btn-outline-warning">Html</a>
+                @if (document.FileType == FileType.PDF)
+                {
+                    <a class="btn btn-sm btn-primary">To Docx</a>
+                    <a class="btn btn-sm btn-warning">To Html</a>
+                }
+                @if (document.FileType == FileType.DOCX || document.FileType == FileType.DOC)
+                {
+                    <a class="btn btn-sm btn-warning">To Html</a>
+                    <a class="btn btn-sm btn-danger">To Pdf</a>
+                }
+                @if (document.FileType == FileType.HTML)
+                {
+                    <a class="btn btn-sm btn-primary">To Docx</a>
+                    <a class="btn btn-sm btn-danger">To Pdf</a>
+                }
             </td>
         </tr>
     }

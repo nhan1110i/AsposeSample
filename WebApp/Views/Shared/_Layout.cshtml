@@ -20,13 +20,24 @@
     </div>
     <hr />
     <div class="row">
-        <div class="col-sm-3">
-            @await Component.InvokeAsync("Directory");
+        <div class="col-sm-2">
+
         </div>
-        <div class="col-sm-9">
-            @RenderBody()
+        <div class="col-sm-8">
+            <div class="container-fluid row">
+                <div class="col-sm-3">
+                    @await Component.InvokeAsync("Directory")
+                </div>
+                <div class="col-sm-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+
         </div>
     </div>
+    
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

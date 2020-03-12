@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\G\\Solution1\\Solution1\\WebApp\\WebApp.csproj": {}
+    "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj": {}
   },
   "projects": {
-    "D:\\G\\Solution1\\Solution1\\WebApp\\WebApp.csproj": {
+    "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\G\\Solution1\\Solution1\\WebApp\\WebApp.csproj",
+        "projectUniqueName": "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj",
         "projectName": "WebApp",
-        "projectPath": "D:\\G\\Solution1\\Solution1\\WebApp\\WebApp.csproj",
+        "projectPath": "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj",
         "packagesPath": "C:\\Users\\nhanpt\\.nuget\\packages\\",
-        "outputPath": "D:\\G\\Solution1\\Solution1\\WebApp\\obj\\",
+        "outputPath": "D:\\G\\AsposeSample\\WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nhanpt\\AppData\\Roaming\\NuGet\\NuGet.Config",

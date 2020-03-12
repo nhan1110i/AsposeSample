@@ -19,9 +19,9 @@ namespace WebApp.Components
             this.doc = doc;
             this.map = map;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            List<ItemViewModel> result = map.Map<List<Document>, List<ItemViewModel>>(doc.LocalData());
+            List<ItemViewModel> result = map.Map<List<Document>, List<ItemViewModel>>((await doc.ListAllAsync()).ToList());
             return View(result);
         }
     }

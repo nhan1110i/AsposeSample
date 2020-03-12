@@ -13,6 +13,9 @@ using Microsoft.Extensions.Hosting;
 using WebApp.AutoMapper;
 using WebApp.Repositories;
 using WebApp.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+
 namespace WebApp
 {
     public class Startup
@@ -38,6 +41,8 @@ namespace WebApp
             services.AddScoped<docLanDbcontext>();
             services.AddScoped<DirectoryRepository>();
             services.AddScoped<DocumentRepository>();
+
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(),"wwwroot")));
             services.AddControllersWithViews();
         }
 

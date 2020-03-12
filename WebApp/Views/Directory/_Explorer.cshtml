@@ -1,11 +1,19 @@
 ﻿@using WebApp.ViewModels
 @using Syncfusion.EJ2
 @model IEnumerable<ItemViewModel>
+<style>
+    .folder {
+        background-image: url("~/css/folder.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 <div class="control-section">
     <div class="control_wrapper">
         <ejs-treeview id="treedata" sortOrder="Ascending">
-            <e-treeview-fields dataSource="Model" id="Id" parentId="ParentId" text="Name" hasChildren="Items" expanded="true" iconCss="IconCss"></e-treeview-fields>
+            <e-treeview-fields dataSource="Model" id="Id" parentId="ParentId" text="Name" hasChildren="Items" expanded="true" iconCss="FileType"></e-treeview-fields>
         </ejs-treeview>
     </div>
 </div>
 
+<img src="~/css/folder.png" />
