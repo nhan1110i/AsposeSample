@@ -1,0 +1,52 @@
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="cart.css" rel="stylesheet" />
+<link href="search.css" rel="stylesheet" />
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="find-order ff">
+                <p class="find-order__title">TRA CỨU ĐƠN HÀNG</p>
+                <p class="find-order__note"><i>Hãy nhập <b>Số điện thoại</b> hoặc <b>Mã đơn hàng</b> để tra cứu tình trạng đơn hàng của bạn nhé ! ^ ^</i></p>
+                <div class="find-order__form">
+				<input type="text" id="txtOrderId" class="find-order__form--input">
+                    <!-- <asp:TextBox ID="txtOrderID" runat="server" CssClass="find-order__form--input"></asp:TextBox> -->
+                    
+                    <!-- <asp:Button ID="btnSearch" runat="server" Text="KIỂM TRA" CssClass="find-order__form--check-btn" OnClick="btnSearch_Click" /> -->
+					<input type="button" id="btnSearch" value="KIỂM TRA" class="find-order__form--check-btn">
+                </div>
+
+                <div class="find-order__table">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Ảnh sản phẩm</td>
+                                    <td>Đơn giá</td>
+                                    <td>Số lượng</td>
+                                    <td>Thành tiền</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                        <tr>
+                                            <td><a href="#" class="giohang__table--link">
+                                                <img src="aoni.png" class="giohang__table--img">Anoni</a></td>
+                                            <td>50.000 VNĐ</b></td>
+                                            <td>10</td>
+                                            <td><b>5.000.000 VNĐ</b></td>
+                                        </tr>
+                                <tr>
+                                    <td colspan="4" class="find-order__table--notfound">
+                                        <strong></strong>
+                                        <span class="text-danger"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

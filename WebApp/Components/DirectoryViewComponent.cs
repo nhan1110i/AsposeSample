@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApp.AutoMapper;
 using WebApp.Models;
@@ -22,9 +23,11 @@ namespace WebApp.ViewComponents
             mapper = _mapper;
             doc = _doc;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            List<ItemViewModel> result = new MapperToItemViewModel(mapper).ToItemViewModel(dr.LocalData(), doc.LocalData());
+            List<Directory> directories = (await dr.GetListAsync()).ToList();
+            List<Document> documents = (await doc.ListAllAsync()).ToList();
+            List<ItemViewModel> result = new MapperToItemViewModel(mapper).ToItemViewModel(directories, documents);
             return View(result);
         }
 

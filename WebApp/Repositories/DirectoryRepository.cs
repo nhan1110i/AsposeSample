@@ -15,6 +15,15 @@ namespace WebApp.Repositories
         {
             db = _db;
         }
+        public async Task<IReadOnlyList<Directory>> GetListAsync()
+        {
+            return await db.Directories.ToListAsync();
+        }
+        public async Task<Directory> AddAsync(Directory directory)
+        {
+            await db.Directories.AddAsync(directory);
+            return directory;
+        }
         public List<Directory> LocalData()
         {
             List<Directory> data = new List<Directory>();
@@ -72,16 +81,6 @@ namespace WebApp.Repositories
                 Name = "Folder 2.2"
             });
             return data;
-        }
-        public async Task<IReadOnlyList<Directory>> ListAsync()
-        {
-            return await db.Directories.Include(dir => dir.SubDirectories).ToListAsync();
-        }
-        public async Task<Directory> AddAsync(Directory directory)
-        {
-            db.Directories.Add(directory);
-            await db.SaveChangesAsync();
-            return directory;
         }
     }
 }

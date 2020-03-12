@@ -9,6 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp.Repositories;
 using WebApp.Models;
 using WebApp.Constant;
+using Directory = System.IO.Directory;
+using Aspose.Html;
+using Aspose.Html.Saving;
+using Aspose.Html.Converters;
+using Aspose.Pdf;
+using Document = WebApp.Models.Document;
 
 namespace WebApp.Controllers
 {
@@ -25,7 +31,7 @@ namespace WebApp.Controllers
         {
             string[] fileExtentions = { ".doc", ".docx", ".pdf", ".html" };
             var document = Request.Form.Files[0];
-            if(Array.IndexOf(fileExtentions,Path.GetExtension(document.FileName)) != -1)
+            if (Array.IndexOf(fileExtentions, Path.GetExtension(document.FileName)) != -1)
             {
                 string FileType = Path.GetExtension(document.FileName).Split('.')[1];
                 string FileName = document.FileName.Split('.')[0];
@@ -41,12 +47,68 @@ namespace WebApp.Controllers
                     await document.CopyToAsync(steam);
                 }
             }
-           
+
+            return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> ConvertToPdf(int id)
+        {
+            Document docConvert = await dr.GetByIdAsync(id);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
+            var pathSave = Path.Combine(path, "Convert - " + docConvert.Name + ".pdf");
+            if (docConvert.FileType == FileType.DOCX || docConvert.FileType == FileType.DOC)
+            {
+                var wordFile = new Aspose.Words.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
+                wordFile.Save(pathSave, Aspose.Words.SaveFormat.Pdf);
+            }
+            else if (docConvert.FileType == FileType.HTML)
+            {
+                HTMLDocument htmlFile = new HTMLDocument(GetPath(docConvert.Name + "." + docConvert.FileType));
+
+                Converter.ConvertHTML(htmlFile, new Aspose.Html.Saving.PdfSaveOptions { JpegQuality = 100 }, pathSave);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> ConvertToWord(int id)
+        {
+            Document docConvert = await dr.GetByIdAsync(id);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
+            var pathSave = Path.Combine(path, "Convert - " + docConvert.Name + ".docx");
+            if (docConvert.FileType == FileType.PDF)
+            {
+                var pdfFile = new Aspose.Pdf.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
+                DocSaveOptions opt = new DocSaveOptions()
+                {
+                    Format = DocSaveOptions.DocFormat.DocX
+                };
+                pdfFile.Save(pathSave, opt);
+
+            }
+            else if (docConvert.FileType == FileType.HTML)
+            {
+                var htmlFile = new HTMLDocument(GetPath(docConvert.Name + "." + docConvert.FileType));
+                //TODO: convert
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public async Task<IActionResult> ConvertToHtml(int id)
+        {
+            Document docConvert = await dr.GetByIdAsync(id);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
+            var pathSave = Path.Combine(path, "Convert - " + docConvert.Name + ".html");
+            if(docConvert.FileType == FileType.PDF)
+            {
+                var pdfFile = new Aspose.Pdf.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
+                pdfFile.Save(pathSave, Aspose.Pdf.SaveFormat.Html);
+            }else if(docConvert.FileType == FileType.DOCX || docConvert.FileType == FileType.DOC)
+            {
+                var docFile = new Aspose.Words.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
+                docFile.Save(pathSave, Aspose.Words.SaveFormat.Html);
+            }
             return RedirectToAction("Index","Home");
         }
-        public async Task<IActionResult> ConvertDocument(int fileId, string ToFileType)
+        private string GetPath(string fileName)
         {
-            Document docConvert = await
+            return Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents", fileName);
         }
     }
 }
