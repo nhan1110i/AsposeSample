@@ -66,6 +66,12 @@ namespace WebApp.Controllers
 
                 Converter.ConvertHTML(htmlFile, new Aspose.Html.Saving.PdfSaveOptions { JpegQuality = 100 }, pathSave);
             }
+            await dr.AddAsync(new Document
+            {
+                Name = "Convert - " + docConvert.Name,
+                FileType = FileType.PDF,
+                DirectoryId = 1
+            });
             return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> ConvertToWord(int id)
@@ -88,6 +94,12 @@ namespace WebApp.Controllers
                 var htmlFile = new HTMLDocument(GetPath(docConvert.Name + "." + docConvert.FileType));
                 //TODO: convert
             }
+            await dr.AddAsync(new Document
+            {
+                Name = "Convert - " + docConvert.Name,
+                FileType = FileType.DOCX,
+                DirectoryId = 1
+            });
             return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> ConvertToHtml(int id)
@@ -104,6 +116,12 @@ namespace WebApp.Controllers
                 var docFile = new Aspose.Words.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
                 docFile.Save(pathSave, Aspose.Words.SaveFormat.Html);
             }
+            await dr.AddAsync(new Document
+            {
+                Name = "Convert - " + docConvert.Name,
+                FileType = FileType.HTML,
+                DirectoryId = 1
+            });
             return RedirectToAction("Index","Home");
         }
         private string GetPath(string fileName)
