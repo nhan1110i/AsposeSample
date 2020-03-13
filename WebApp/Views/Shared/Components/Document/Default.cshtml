@@ -8,32 +8,34 @@
         <th>Document</th>
         <th>Type</th>
         <th>Convert</th>
+        <th>Action</th>
     </tr>
     @foreach (var document in Model)
     {
         <tr>
-            <td><input type="checkbox" id="@document.Id" /></td>
+            <td><input type="checkbox" id="@document.Id" onchange="checkTick(@document.Id)"/></td>
             <td>@document.Name</td>
             <td>@document.FileType</td>
             <td>
                 @if (document.FileType == FileType.PDF)
                 {
 
-                    <a class="btn btn-sm btn-primary" asp-controller="Document" asp-action="ConvertToWord" asp-route-id="@document.Id">To Docx</a>
-                    <a class="btn btn-sm btn-warning" asp-controller="Document" asp-action="ConvertToHtml" asp-route-id="@document.Id">To Html</a>
+                    <a class="btn btn-sm btn-primary" asp-controller="Document" asp-action="ConvertToWord" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Docx</a>
+                    <a class="btn btn-sm btn-warning" asp-controller="Document" asp-action="ConvertToHtml" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Html</a>
                 }
                 @if (document.FileType == FileType.DOCX || document.FileType == FileType.DOC)
                 {
-                    <a class="btn btn-sm btn-warning" asp-controller="Document" asp-action="ConvertToHtml" asp-route-id="@document.Id">To Html</a>
-                    <a class="btn btn-sm btn-info" asp-controller="Document" asp-action="ConvertToPdf" asp-route-id="@document.Id">To Pdf</a>
+                    <a class="btn btn-sm btn-warning" asp-controller="Document" asp-action="ConvertToHtml" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Html</a>
+                    <a class="btn btn-sm btn-info" asp-controller="Document" asp-action="ConvertToPdf" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Pdf</a>
                 }
                 @if (document.FileType == FileType.HTML)
                 {
-                    <a class="btn btn-sm btn-primary" asp-controller="Document" asp-action="ConvertToWord" asp-route-id="@document.Id">To Docx</a>
-                    <a class="btn btn-sm btn-info" asp-controller="Document" asp-action="ConvertToPdf" asp-route-id="@document.Id">To Pdf</a>
+                    <a class="btn btn-sm btn-primary" asp-controller="Document" asp-action="ConvertToWord" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Docx</a>
+                    <a class="btn btn-sm btn-info" asp-controller="Document" asp-action="ConvertToPdf" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Pdf</a>
                 }
             </td>
-        </tr>
+            <td><a href="/documents/@document.Name.@document.FileType" target="_blank"><span class="glyphicon glyphicon-share-alt"></span> Show</a></td>
+</tr>
     }
 </table>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"

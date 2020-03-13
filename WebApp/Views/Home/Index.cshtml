@@ -80,9 +80,9 @@
         }
     }
 </style>
-
+<script src="~/js/document.js"></script>
 <a href="#" class="btn btn-primary" id="modal-btn">Upload Document</a>
-<a href="#" class="btn btn-warning" id="compare">Compare Document</a>
+<a href="#" class="btn btn-warning" id="compare" onclick="redirectToCompare()">Compare Document</a>
 <hr />
 @await Component.InvokeAsync("Document")
 

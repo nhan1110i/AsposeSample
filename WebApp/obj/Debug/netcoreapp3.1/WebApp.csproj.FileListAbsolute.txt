@@ -469,3 +469,5 @@ D:\G\AsposeSample\WebApp\obj\Debug\netcoreapp3.1\WebApp.Views.pdb
 D:\G\AsposeSample\WebApp\obj\Debug\netcoreapp3.1\WebApp.csproj.CopyComplete
 D:\G\AsposeSample\WebApp\obj\Debug\netcoreapp3.1\WebApp.dll
 D:\G\AsposeSample\WebApp\obj\Debug\netcoreapp3.1\WebApp.pdb
+D:\G\AsposeSample\WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Document\ViewDocumentById.cshtml.g.cs
+D:\G\AsposeSample\WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Document\CompareDocument.cshtml.g.cs

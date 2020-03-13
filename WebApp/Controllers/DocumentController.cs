@@ -15,6 +15,7 @@ using Aspose.Html.Saving;
 using Aspose.Html.Converters;
 using Aspose.Pdf;
 using Document = WebApp.Models.Document;
+using WebApp.Common;
 
 namespace WebApp.Controllers
 {
@@ -25,6 +26,26 @@ namespace WebApp.Controllers
         public DocumentController(DocumentRepository _dr)
         {
             dr = _dr;
+        }
+        [HttpGet]
+        public async Task<IActionResult> CompareDocument(int doc1, int doc2)
+        {
+            
+            Document firstDocument = await dr.GetByIdAsync(doc1);
+            Document secondDocument = await dr.GetByIdAsync(doc2);
+            //var compareWord = new Aspose.Words.Document(firstDocument.CompareDocument(secondDocument));
+            var result = new Document
+            {
+                Name = firstDocument.CompareDocument(secondDocument),
+                FileType = FileType.DOCX,
+                Id = 0
+            };
+            return View(result);
+        }
+        public async Task<IActionResult> ViewDocumentById(int id)
+        {
+            var docView = await dr.GetByIdAsync(id);
+            return View(docView);
         }
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> AddDocument()
@@ -53,19 +74,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> ConvertToPdf(int id)
         {
             Document docConvert = await dr.GetByIdAsync(id);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
-            var pathSave = Path.Combine(path, "Convert - " + docConvert.Name + ".pdf");
-            if (docConvert.FileType == FileType.DOCX || docConvert.FileType == FileType.DOC)
-            {
-                var wordFile = new Aspose.Words.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
-                wordFile.Save(pathSave, Aspose.Words.SaveFormat.Pdf);
-            }
-            else if (docConvert.FileType == FileType.HTML)
-            {
-                HTMLDocument htmlFile = new HTMLDocument(GetPath(docConvert.Name + "." + docConvert.FileType));
-
-                Converter.ConvertHTML(htmlFile, new Aspose.Html.Saving.PdfSaveOptions { JpegQuality = 100 }, pathSave);
-            }
+            
             await dr.AddAsync(new Document
             {
                 Name = "Convert - " + docConvert.Name,
@@ -77,23 +86,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> ConvertToWord(int id)
         {
             Document docConvert = await dr.GetByIdAsync(id);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
-            var pathSave = Path.Combine(path, "Convert - " + docConvert.Name + ".docx");
-            if (docConvert.FileType == FileType.PDF)
-            {
-                var pdfFile = new Aspose.Pdf.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
-                DocSaveOptions opt = new DocSaveOptions()
-                {
-                    Format = DocSaveOptions.DocFormat.DocX
-                };
-                pdfFile.Save(pathSave, opt);
-
-            }
-            else if (docConvert.FileType == FileType.HTML)
-            {
-                var htmlFile = new HTMLDocument(GetPath(docConvert.Name + "." + docConvert.FileType));
-                //TODO: convert
-            }
+            docConvert.ToWord();
             await dr.AddAsync(new Document
             {
                 Name = "Convert - " + docConvert.Name,
@@ -105,17 +98,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> ConvertToHtml(int id)
         {
             Document docConvert = await dr.GetByIdAsync(id);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents");
-            var pathSave = Path.Combine(path, "Convert - " + docConvert.Name + ".html");
-            if(docConvert.FileType == FileType.PDF)
-            {
-                var pdfFile = new Aspose.Pdf.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
-                pdfFile.Save(pathSave, Aspose.Pdf.SaveFormat.Html);
-            }else if(docConvert.FileType == FileType.DOCX || docConvert.FileType == FileType.DOC)
-            {
-                var docFile = new Aspose.Words.Document(GetPath(docConvert.Name + "." + docConvert.FileType));
-                docFile.Save(pathSave, Aspose.Words.SaveFormat.Html);
-            }
+            docConvert.ToHtml();
             await dr.AddAsync(new Document
             {
                 Name = "Convert - " + docConvert.Name,
@@ -124,9 +107,6 @@ namespace WebApp.Controllers
             });
             return RedirectToAction("Index","Home");
         }
-        private string GetPath(string fileName)
-        {
-            return Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents", fileName);
-        }
+        
     }
 }

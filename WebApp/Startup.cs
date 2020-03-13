@@ -42,6 +42,8 @@ namespace WebApp
             services.AddScoped<DirectoryRepository>();
             services.AddScoped<DocumentRepository>();
 
+
+
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(),"wwwroot")));
             services.AddControllersWithViews();
         }
@@ -59,7 +61,17 @@ namespace WebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "documents")),
+                RequestPath = "/documents"
+            });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "Temp")),
+                RequestPath = "/compares"
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\documents\" />
+    <Folder Include="wwwroot\Temp\" />
   </ItemGroup>
 
 
