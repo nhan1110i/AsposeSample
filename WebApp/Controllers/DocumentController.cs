@@ -28,7 +28,7 @@ namespace WebApp.Controllers
             dr = _dr;
         }
         [HttpGet]
-        public async Task<IActionResult> CompareDocument(int doc1, int doc2)
+        public async Task<FileResult> CompareDocument(int doc1, int doc2)
         {
             
             Document firstDocument = await dr.GetByIdAsync(doc1);
@@ -40,7 +40,21 @@ namespace WebApp.Controllers
                 FileType = FileType.DOCX,
                 Id = 0
             };
-            return View(result);
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Temp", result.Name);
+            byte[] file = System.IO.File.ReadAllBytes(filePath);
+            return File(file, "application/force-download", result.Name);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDocument(int id)
+        {
+            Document docDelete = await dr.GetByIdAsync(id);
+            if(docDelete != null)
+            {
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "documents", docDelete.Name + "." + docDelete.FileType);
+                System.IO.File.Delete(filePath);
+                await dr.DeleteByIdAsync(docDelete);
+            }
+            return RedirectToAction("Index","Home");
         }
         public async Task<IActionResult> ViewDocumentById(int id)
         {
@@ -74,7 +88,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> ConvertToPdf(int id)
         {
             Document docConvert = await dr.GetByIdAsync(id);
-            
+            docConvert.ToPdf();
             await dr.AddAsync(new Document
             {
                 Name = "Convert - " + docConvert.Name,

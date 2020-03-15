@@ -25,7 +25,16 @@ namespace WebApp.Repositories
         }
         public async Task<Document> GetByIdAsync(int id) {
             Document result = await db.Documents.FirstOrDefaultAsync(doc => doc.Id == id);
-            return result;
+            if(result != null)
+            {
+                return result;
+            }
+            return null;
+        }
+        public async Task DeleteByIdAsync(Document doc)
+        {
+            db.Entry(doc).State = EntityState.Deleted;
+            await db.SaveChangesAsync();
         }
         public List<Document> LocalData()
         {

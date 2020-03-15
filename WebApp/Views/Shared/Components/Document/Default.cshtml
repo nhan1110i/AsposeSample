@@ -1,7 +1,7 @@
 ﻿@using WebApp.ViewModels
 @using WebApp.Constant
 @model IEnumerable<ItemViewModel>
-
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <table class="table">
     <tr>
         <th>#</th>
@@ -34,7 +34,9 @@
                     <a class="btn btn-sm btn-info" asp-controller="Document" asp-action="ConvertToPdf" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> To Pdf</a>
                 }
             </td>
-            <td><a href="/documents/@document.Name.@document.FileType" target="_blank"><span class="glyphicon glyphicon-share-alt"></span> Show</a></td>
+            <td><a href="/documents/@document.Name.@document.FileType" target="_blank"><span class="glyphicon glyphicon-share-alt"></span> Show</a>
+                <a asp-controller="Document" asp-action="DeleteDocument" asp-route-id="@document.Id"><span class="glyphicon glyphicon-file"></span> delete</a>
+            </td>
 </tr>
     }
 </table>

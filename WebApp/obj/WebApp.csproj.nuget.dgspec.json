@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj": {}
+    "D:\\GEM\\AsposeSample\\WebApp\\WebApp.csproj": {}
   },
   "projects": {
-    "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj": {
+    "D:\\GEM\\AsposeSample\\WebApp\\WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj",
+        "projectUniqueName": "D:\\GEM\\AsposeSample\\WebApp\\WebApp.csproj",
         "projectName": "WebApp",
-        "projectPath": "D:\\G\\AsposeSample\\WebApp\\WebApp.csproj",
-        "packagesPath": "C:\\Users\\nhanpt\\.nuget\\packages\\",
-        "outputPath": "D:\\G\\AsposeSample\\WebApp\\obj\\",
+        "projectPath": "D:\\GEM\\AsposeSample\\WebApp\\WebApp.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\GEM\\AsposeSample\\WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\nhanpt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,8 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://nuget.syncfusion.com/nuget_aspnetcore/nuget/getsyncfusionpackages/aspnetcore": {},
-          "http://nuget.syncfusion.com/nuget_javascript/nuget/getsyncfusionpackages/javascript": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -97,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

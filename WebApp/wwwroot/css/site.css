@@ -70,3 +70,26 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.folder {
+    background-image: url("https://cdn0.iconfinder.com/data/icons/Free-Icons-Shimmer-01-Creative-Freedom/256/folder.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pdf {
+    background-image: url("../icon/pdf.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.docx {
+    background-image: url("../icon/doc.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.html {
+    background-image: url("../icon/html.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

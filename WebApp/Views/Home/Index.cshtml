@@ -16,14 +16,14 @@
         left: 0;
         top: 0;
         height: 100%;
-        width: 100%;
+        width: 100% !important;
         overflow: auto;
         background-color: rgba(0, 0, 0, 0.5);
     }
 
     .modal-content {
         margin: 10% auto;
-        width: 60%;
+        width: 60% !important;
         box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
         animation-name: modalopen;
         animation-duration: var(--modal-duration);
@@ -81,8 +81,8 @@
     }
 </style>
 <script src="~/js/document.js"></script>
-<a href="#" class="btn btn-primary" id="modal-btn">Upload Document</a>
-<a href="#" class="btn btn-warning" id="compare" onclick="redirectToCompare()">Compare Document</a>
+<a href="#" class="btn btn-primary" id="modal-btn"><i class="fa fa-upload"></i> Upload</a>
+<a href="#" class="btn btn-warning" id="compare" onclick="redirectToCompare()"><i class="fa fa-files-o"></i> Compare</a>
 <hr />
 @await Component.InvokeAsync("Document")
 
