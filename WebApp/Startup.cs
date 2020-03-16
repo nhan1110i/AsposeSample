@@ -72,6 +72,10 @@ namespace WebApp
                 FileProvider = new PhysicalFileProvider(Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "Temp")),
                 RequestPath = "/compares"
             });
+            using(var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<docLanDbcontext>().Database.Migrate();
+            }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
